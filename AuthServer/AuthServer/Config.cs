@@ -49,9 +49,9 @@ namespace AuthServer
                     ClientName = "React SPA",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = { "openid", "profile", "email", "api.read" },
-                    RedirectUris = {"http://localhost:4200/signin-callback.html"},
-                    PostLogoutRedirectUris = {"http://localhost:4200/silent-renew.html"},
-                    AllowedCorsOrigins = {"http://localhost:4200"},
+                    RedirectUris = {"http://localhost:3000/callback.html"},
+                    PostLogoutRedirectUris = {"http://localhost:3000/"},
+                    AllowedCorsOrigins = {"http://localhost:3000/"},
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600
                 }

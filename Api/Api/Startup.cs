@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Configurations;
 using AutoMapper;
 using LibraryLab.Configurations;
 using Microsoft.AspNetCore.Builder;
@@ -32,13 +33,13 @@ namespace Api
             services.AddLibraryAPIContext(Configuration)
                     .ConfigureRepositories()
                     .ConfigureServices()
-                    .JwtAuthentication();
+                    .IdentityServiceAuthoProvided();
 
 
             Mapper.Initialize(cfg =>
             cfg.AddMaps(new[] {
                 "DataEFCore",
-                "LibraryLab",
+                "Api",
                 "Domain"
                 })
             );
@@ -51,6 +52,10 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseAuthentication();
+
 
             app.UseMvc();
         }

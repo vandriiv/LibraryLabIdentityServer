@@ -1,0 +1,4 @@
+.dropdown-item a, .navbar-link, .navbar-link:hover{
+    color: inherit;
+    text-decoration: none;
+}

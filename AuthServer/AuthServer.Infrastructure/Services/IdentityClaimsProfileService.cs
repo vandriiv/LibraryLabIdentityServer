@@ -30,18 +30,19 @@ namespace AuthServer.Infrastructure.Services
             var principal = await _claimsFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
-            claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            claims.Add(new Claim(JwtClaimTypes.GivenName, user.Name));
+            claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();           
             claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
-            var roles = await _userManager.GetRolesAsync(user);
-            // note: to dynamically add roles (ie. for users other than consumers - simply look them up by sub id
+            claims.Add(new Claim(IdentityServerConstants.StandardScopes.Phone,user.PhoneNumber));            
+            var roles = await _userManager.GetRolesAsync(user);           
 
             if (roles.Contains(Roles.Admin)) {
-                claims.Add(new Claim(ClaimTypes.Role, Roles.Admin)); // need this for role-based authorization - https://stackoverflow.com/questions/40844310/role-based-authorization-with-identityserver4
+                claims.Add(new Claim(ClaimTypes.Role, Roles.Admin));
+                claims.Add(new Claim("roleName", Roles.Admin));
             }
             else
             {
                 claims.Add(new Claim(ClaimTypes.Role, Roles.Consumer));
+                claims.Add(new Claim("roleName", Roles.Consumer));
             }
             context.IssuedClaims = claims;
         }
