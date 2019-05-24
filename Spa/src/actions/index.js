@@ -151,14 +151,15 @@ const login = userService => dispatch => {
 
 };
 
-const registration = bookService => userRegistrationData => dispatch => {
-  bookService
+const registration = userService => userRegistrationData => dispatch => {
+  userService
     .registration(userRegistrationData)
-    .then(message => dispatch(registrationSuccess(message)))
-    .catch(err => dispatch(registrationFailure(err)));
+    .then(message => dispatch(registrationSuccess()))
+    .catch(err => {console.log(err);dispatch(registrationFailure(err));});
 };
 
-const logout = () => dispatch => {
+const logout = userService =>() => dispatch => {
+  userService.logout();
   dispatch(doLogout());
 };
 

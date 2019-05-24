@@ -309,7 +309,7 @@ namespace AuthServer.Controllers
         }
         private async Task<LogoutViewModel> BuildLogoutViewModelAsync(string logoutId)
         {
-            var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = false};
+            var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = false };
 
             if (User?.Identity.IsAuthenticated != true)
             {

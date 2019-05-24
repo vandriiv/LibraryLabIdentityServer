@@ -26,7 +26,7 @@ const updateUserStatus = (state, action) => {
         case 'REGISTRATION_SUCCESS':
             return {
                 isLoggedIn: state.userStatus.isLoggedIn,
-                message: action.payload,
+                message: "Success",
                 roleName: state.userStatus.roleName,
                 email:state.userStatus.email
             };

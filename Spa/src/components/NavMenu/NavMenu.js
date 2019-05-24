@@ -100,18 +100,11 @@ class NavMenu extends Component {
                   Cart
                 </Nav.Link>
               </LinkContainer>
-              {isLoggedIn ?
-                <LinkContainer
-                  to={"/logout"}
-                  isActive={() => false}
-                  exact
-                  onClick={logout}
-                >
-                  <Nav.Link active={false}>
+              {isLoggedIn ?                
+                  <Nav.Link onClick={logout}>
                     <FaSignOutAlt size={20} style={{ marginRight: 10 }} />
                     Logout
-              </Nav.Link>
-                </LinkContainer>
+              </Nav.Link>               
                 :              
                   <Nav.Link onClick={login} >
                     <FaUser size={20} style={{ marginRight: 10 }} />
@@ -151,7 +144,7 @@ class NavMenu extends Component {
 
 const mapDispatchToProps = (dispatch,{userService}) => { 
   return bindActionCreators({
-    logout: logout,
+    logout: logout(userService),
     login:login(userService)
   }, dispatch);
 };

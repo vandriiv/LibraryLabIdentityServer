@@ -37,7 +37,7 @@ namespace AuthServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = { "openid", "profile", "email", "api.read" },
                     RedirectUris = {"http://localhost:4200/auth-callback"},
-                    PostLogoutRedirectUris = {"http://localhost:4200/"},
+                    PostLogoutRedirectUris = {"http://localhost:4200"},
                     AllowedCorsOrigins = {"http://localhost:4200"},
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600
@@ -50,8 +50,8 @@ namespace AuthServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = { "openid", "profile", "email", "api.read" },
                     RedirectUris = {"http://localhost:3000/callback.html"},
-                    PostLogoutRedirectUris = {"http://localhost:3000/"},
-                    AllowedCorsOrigins = {"http://localhost:3000/"},
+                    PostLogoutRedirectUris = {"http://localhost:3000"},
+                    AllowedCorsOrigins = {"http://localhost:3000"},
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600
                 }
