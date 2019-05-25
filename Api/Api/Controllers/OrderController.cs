@@ -87,7 +87,7 @@ namespace LibraryLab.Controllers
         }
 
         [HttpGet("orders/{email}")]
-        [Authorize]
+        [Authorize(Policy = "consumer")]
         public async Task<IActionResult> GetUserBooks(string email)
         {
             try

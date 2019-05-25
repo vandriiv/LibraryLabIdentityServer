@@ -45,7 +45,8 @@ namespace AuthServer.Api.Infrastructure.Context
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RoleId).HasColumnName("role_id");
+                entity.Property(e => e.Role).HasColumnName("role").HasMaxLength(60)
+                    .IsUnicode(false);
             });          
         }
     }

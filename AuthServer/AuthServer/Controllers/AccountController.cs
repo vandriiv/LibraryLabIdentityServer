@@ -179,12 +179,13 @@ namespace AuthServer.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded) return BadRequest(result.Errors);            
-                      
+            if (!result.Succeeded) return BadRequest(result.Errors);
+            
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", Roles.Consumer));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("phoneNumber", user.PhoneNumber));
-            var apiUser = new User { Email = user.Email, PhoneNumber = user.PhoneNumber };
+            var apiUser = new User { Email = user.Email, PhoneNumber = user.PhoneNumber,Role=Roles.Consumer };
+            await _userManager.AddToRoleAsync(user, Roles.Consumer);
             await _apiUserService.AddAsync(apiUser);
 
             return Ok(new RegisterResponseViewModel(user));

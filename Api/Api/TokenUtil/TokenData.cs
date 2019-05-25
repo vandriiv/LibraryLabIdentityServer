@@ -8,6 +8,6 @@ namespace LibraryLab.TokenUtil
     public class TokenData
     {      
         public string Email { get; set; }
-        public long RoleId { get; set; }
+        public string Role { get; set; }
     }
 }

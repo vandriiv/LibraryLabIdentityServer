@@ -7,6 +7,7 @@ using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,19 +31,25 @@ namespace DataEFCore.Repositories
             {
                 await _context.SaveChangesAsync();
             }
-            catch(DbUpdateException e)
+            catch (DbUpdateException e)
             {
-              /*  var innerEx = e.InnerException;
-                if (innerEx.SqlState == "23503")
+
+                if (e.InnerException is SqlException sqlException)
                 {
-                    throw new MemberRelationException("Check entered value. ", 
-                        innerEx.ConstraintName.Substring(0, innerEx.ConstraintName.Length-3));
+                    if (sqlException.Number == 547)
+                    {
+                        throw new MemberRelationException("Check entered value. ",
+                            sqlException.Message);
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 else
                 {
                     throw;
-                }       */         
-                
+                }
             }
         }
 
@@ -63,18 +70,23 @@ namespace DataEFCore.Repositories
             }
             catch (DbUpdateException e)
             {
-                /*var innerEx = (Npgsql.PostgresException)e.InnerException;
-                if (innerEx.SqlState == "23503")
+
+                if (e.InnerException is SqlException sqlException)
                 {
-                    throw new MemberRelationException("Check entered value. ",
-                        innerEx.ConstraintName.Substring(0, innerEx.ConstraintName.Length - 3));
+                    if (sqlException.Number==547)
+                    {
+                        throw new MemberRelationException("Check entered value. ",
+                            sqlException.Message);
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 else
                 {
                     throw;
-                }*/
-                throw;
-
+                }
             }
         }
 

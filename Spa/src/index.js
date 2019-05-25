@@ -16,7 +16,7 @@ const userManagerConfig = {
   redirect_uri: 'http://localhost:3000/callback.html',
   response_type: 'token id_token',
   scope:"openid profile email api.read",
-  authority: 'http://localhost:54990/',
+  authority: 'http://localhost:5000/',
   silent_redirect_uri: 'http://localhost:3000/',
   post_logout_redirect_uri:'http://localhost:3000/',
   automaticSilentRenew: true,

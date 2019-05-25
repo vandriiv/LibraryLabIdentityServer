@@ -48,7 +48,7 @@ namespace Domain.Services
             {
                 throw new UserIsAlreadyExistException(newUser.Email);
             }
-            newUser.RoleId = 1;
+            newUser.Role = "consumer";
             await _userRepository.AddAsync(newUser);
 
         }

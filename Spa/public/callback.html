@@ -15,14 +15,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.7.1/oidc-client.js"></script>
     <script>
         var mgr = new Oidc.UserManager();
-        mgr.signinRedirectCallback().then(function () {
+        mgr.signinRedirectCallback().then(function (e) {
+           
+            localStorage.setItem("token",e.access_token);
             window.history.replaceState({},
                 window.document.title,
                 window.location.origin);
             window.location = "/";
         }, function (error) {
             console.error(error);
-        });
+        });  
     </script>
 
 </body>

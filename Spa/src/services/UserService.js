@@ -2,7 +2,7 @@ import { UserManagerSettings, UserManager } from 'oidc-client';
 import { createUserManager } from 'redux-oidc';
 export default class UserService {
 
-    _authApiURI = "http://localhost:54990/api/";
+    _authApiURI = "http://localhost:5000/api/";
 
     constructor(settings) {
         this.manager = new UserManager(settings);

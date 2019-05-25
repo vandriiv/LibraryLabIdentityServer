@@ -147,7 +147,7 @@ const fetchBooksByAuthorId = bookService => (
 };
 
 const login = userService => dispatch => {
-  userService.login().then(a => console.log(a)).catch(e => console.log(e));
+  userService.login().catch(e => console.log(e));
 
 };
 
@@ -159,6 +159,7 @@ const registration = userService => userRegistrationData => dispatch => {
 };
 
 const logout = userService =>() => dispatch => {
+  localStorage.removeItem("token");
   userService.logout();
   dispatch(doLogout());
 };
@@ -173,6 +174,7 @@ const checkUserStatus = userService => () => dispatch => {
       dispatch(userIsLoggedIn(requiredData));
     }
     else{
+      localStorage.removeItem("token");
       dispatch(userIsGuest());
     }
   })

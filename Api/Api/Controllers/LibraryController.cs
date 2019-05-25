@@ -284,7 +284,7 @@ namespace LibraryLab.Controllers
             }
         }
 
-        [Authorize(Policy ="admin")]
+        
         [HttpGet("authors")]
         public async Task<IActionResult> GetAuthors()
         {

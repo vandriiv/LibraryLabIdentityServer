@@ -17,7 +17,7 @@ namespace AuthServer.Api.Infrastructure.Services
         }        
         public async Task AddAsync(User user)
         {
-            user.RoleId = 1;
+            
             await _context.AddAsync(user);
             await _context.SaveChangesAsync();
         }

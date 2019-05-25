@@ -10,34 +10,21 @@ using System.Threading.Tasks;
 namespace LibraryLab.TokenUtil
 {
     public class JwtProvider
-    {
-        public string GetEncodedJwt(ClaimsIdentity identity)
-        {
-            var now = DateTime.UtcNow;
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-            return encodedJwt;
-        }
+    {      
 
         public TokenData DecodeJwt(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var jsonToken = handler.ReadJwtToken(token);
             var email = jsonToken.Claims.FirstOrDefault(c => c.Type == "email").Value;
-            var roleId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
+            var roleName = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
 
-            if (email != null && roleId != null)
+            if (email != null && roleName != null)
             {
                 return new TokenData
                 {
                     Email = email,
-                    RoleId = long.Parse(roleId)
+                    Role = roleName
                 };
             }
             else

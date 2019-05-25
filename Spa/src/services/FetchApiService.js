@@ -1,5 +1,5 @@
 export default class FetchApiService {
-  _apiBase = "/api/";
+  _apiBase = "http://localhost:5100/api/";
 
   getRequest = async url => {
 
